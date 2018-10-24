@@ -10,7 +10,7 @@
       v-on:change="$emit('change', $event)"
     />
     <label 
-      for="uploadFile"
+      :for="`uploadFile-${id}`"
       v-ripple="ripple"
       :class="`v-btn ${classes}${color} upload-btn`"
     >
