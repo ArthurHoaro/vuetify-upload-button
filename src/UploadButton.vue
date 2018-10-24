@@ -5,6 +5,7 @@
     <input
       :id="`uploadFile-${id}`"
       type="file"
+      :ref="`uploadFile-${id}`"
       :name="name"
       :accept="accept"
       v-on:change="change"
@@ -17,7 +18,15 @@
       {{ icon ? '' : title }}
       <slot name="icon"></slot>
     </label>
-    <v-btn v-if="closable && filename != null" flat icon color="red" class="close" @click.native="deleteFile">
+    <v-btn 
+      v-if="closable && filename != null" 
+      flat 
+      icon 
+      color="red" 
+      class="close" 
+      :data-id="id"
+      @click.native="deleteFile"
+    >
       <v-icon>close</v-icon>
     </v-btn>
   </div>
@@ -132,6 +141,7 @@
       deleteFile(event) {
         this.$emit('deleteFile', event);
         this.filename = null;
+        this.$refs[`uploadFile-${this.id}`].value = ''
       },
     },
   }
