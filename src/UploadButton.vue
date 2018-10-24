@@ -7,7 +7,7 @@
       type="file"
       :name="name"
       :accept="accept"
-      v-on:change="$emit('change', $event)"
+      v-on:change="change"
     />
     <label 
       :for="`uploadFile-${id}`"
@@ -17,6 +17,9 @@
       {{ icon ? '' : title }}
       <slot name="icon"></slot>
     </label>
+    <v-btn v-if="closable && filename != null" flat icon color="red" class="close" @click.native="deleteFile">
+      <v-icon>close</v-icon>
+    </v-btn>
   </div>
 </template>
 
@@ -83,10 +86,15 @@
       title: {
         default: 'Upload',
         type: String
-      }
+      },
+      closable: {
+        default: true,
+        type: Boolean,
+      },
     },
     data: () => ({
       id: Math.floor(Math.random() * 100000),
+      filename: null,
     }),
     computed: {
       classes () {
@@ -111,6 +119,20 @@
         }
         return classString;
       }
+    },
+    methods: {
+      change(event) {
+        this.$emit('change', event);
+        if (event.target.files.length) {
+          this.filename = event.target.files[0].name;
+        } else {
+          this.filename = null;
+        }
+      },
+      deleteFile(event) {
+        this.$emit('deleteFile', event);
+        this.filename = null;
+      },
     },
   }
 </script>
