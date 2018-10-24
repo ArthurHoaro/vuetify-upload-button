@@ -69,7 +69,6 @@ You can use the following props
 | ------------- |---------------| -----:| -----:|
 | accept        | HTML input accept attribute | string | * |
 | block         | block         | bool  | false |
-| fileChangedCallback | callback for when a file is selected, returns a File object | function | undefined |
 | color | vuetify color, e.g. 'primary' | string | 'primary' |
 | disabled | sets disabled property for input/button | bool | false |
 | flat | sets button flat | bool | false |

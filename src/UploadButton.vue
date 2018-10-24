@@ -7,7 +7,7 @@
       type="file"
       :name="name"
       :accept="accept"
-      v-on:change="fileChanged"
+      v-on:change="$emit('change', $event)"
     />
     <label 
       for="uploadFile"
@@ -31,10 +31,6 @@
       block: {
         default: false,
         type: Boolean
-      },
-      fileChangedCallback: {
-        default: undefined,
-        type: Function
       },
       color: {
         default: 'primary',
@@ -113,19 +109,6 @@
         return classString;
       }
     },
-    methods: {
-      fileChanged (e) {
-        if (e) {
-          if (this.fileChangedCallback) {
-            if (e.target.files[0]) {
-              this.fileChangedCallback(e.target.files[0]);
-            } else {
-              this.fileChangedCallback(null);
-            }
-          }
-        }
-      }
-    }
   }
 </script>
 
