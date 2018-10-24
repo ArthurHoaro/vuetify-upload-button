@@ -3,7 +3,7 @@
     class="upload-btn"
   > 
     <input
-      id="uploadFile"
+      :id="`uploadFile-${id}`"
       type="file"
       :name="name"
       :accept="accept"
@@ -85,6 +85,9 @@
         type: String
       }
     },
+    data: () => ({
+      id: Math.floor(Math.random() * 100000),
+    }),
     computed: {
       classes () {
         const classes = {
